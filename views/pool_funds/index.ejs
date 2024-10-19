@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate')%>
+
+<h1>All Stokvels</h1>
+<div>
+    <a href="/poolfunds/new">Add New Pool Fund</a>
+</div>
+<% for (let poolfund of poolfunds){%>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><%= poolfund.name %> </h5>
+                <p class="card-text"><%= poolfund.paymentInterval %></p>
+                <a class="btn btn-primary" href="/poolfunds/<%=poolfund._id%>">View <%=poolfund.name%></a>
+            </div>
+        </div>
+    </div>
+</div>
+<% }%>
