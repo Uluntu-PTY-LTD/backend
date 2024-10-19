@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 const mongoose = require('mongoose');
 const names = require('./names');
 const interval = require('./interval');
@@ -8,7 +12,10 @@ const Transaction = require('../models/transaction');
 const {faker} = require('@faker-js/faker');
 const transaction_type = require('./transaction_type');
 
-mongoose.connect('mongodb://localhost:27017/stokvel', {
+console.log('URI is as follows')
+console.log(process.env.MONGO_DB_URL);
+
+mongoose.connect(process.env.MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -50,12 +57,14 @@ const seedDB = async () => {
     // Create Pool Funds and assign them to users
     const poolFunds = [];
     for (let i = 0; i < 5; i++) {
+        let address = faker.finance.accountName().toLocaleLowerCase().replace(/\s+/g, '');
         const randomUsers = getRandomSubset(users, 3);
         const random100 = Math.floor(Math.random() * 100); //generates a random number between 1 and 100 for names array
         const poolFund = new PoolFund({
             name: `${names[random100]} Society`,
             paymentInterval: `${sample(interval)}`,
-            members: randomUsers.map(user => user._id)
+            members: randomUsers.map(user => user._id),
+            wallet_address: `http://ilp.rafiki.money/${address}`
         })
         await poolFund.save();
         //associate this poolFund with 3 random users

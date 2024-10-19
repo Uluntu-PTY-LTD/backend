@@ -20,7 +20,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-mongoose.connect('mongodb://localhost:27017/stokvel', {
+//console.log(process.env.MONGO_DB_URL);
+
+mongoose.connect(process.env.MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
