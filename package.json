@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node ./app.js"
+  },
   "dependencies": {
     "@interledger/open-payments": "^6.13.1",
     "dotenv": "^16.4.5",
