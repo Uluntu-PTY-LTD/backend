@@ -11,21 +11,10 @@ const User = require('../models/user');
 const Transaction = require('../models/transaction');
 const {faker} = require('@faker-js/faker');
 const transaction_type = require('./transaction_type');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
-console.log('URI is as follows')
-console.log(process.env.MONGO_DB_URL);
-
-mongoose.connect(process.env.MONGO_DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
-});
+console.log(process.env.MONGO_DB_URL)
 
 //Helper functions 
 const sample = array => array[Math.floor(Math.random() * array.length)]; // take random index fromarray
@@ -36,6 +25,15 @@ const getRandomSubset = (arr, num) => {
 
 
 const seedDB = async () => {
+    await mongoose.connect(`${process.env.MONGO_DB_URL}`);
+
+    const db = await mongoose.connection;
+
+    await db.on("error", console.error.bind(console, "connection error:"));
+    await db.once("open", () => {
+        console.log("Database connected");
+    });
+
     await PoolFund.deleteMany({});
     await User.deleteMany({});
     await Transaction.deleteMany({});
