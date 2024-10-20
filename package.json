@@ -4,10 +4,28 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+<<<<<<< HEAD
     "dev": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./src/index.ts",
     "eslint:fix": "eslint --fix",
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js"
+=======
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "@interledger/open-payments": "^6.13.1",
+    "dotenv": "^16.4.5",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.21.1",
+    "flash": "^1.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.7.1",
+    "node-cron": "^3.0.3",
+    "passport": "^0.7.0",
+    "path": "^0.12.7",
+    "readline": "^1.3.0",
+    "session": "^0.1.0"
+>>>>>>> 47c51337f455b5447d38420b651bc71f5d087d4b
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
