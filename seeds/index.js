@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== 'production'){
-    require('dotenv').config();
-}
-
 const mongoose = require('mongoose');
 const names = require('./names');
 const interval = require('./interval');
@@ -12,10 +8,7 @@ const Transaction = require('../models/transaction');
 const {faker} = require('@faker-js/faker');
 const transaction_type = require('./transaction_type');
 
-console.log('URI is as follows')
-console.log(process.env.MONGO_DB_URL);
-
-mongoose.connect(process.env.MONGO_DB_URL, {
+mongoose.connect('mongodb://localhost:27017/stokvel', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

@@ -20,9 +20,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-//console.log(process.env.MONGO_DB_URL);
 
-mongoose.connect(process.env.MONGO_DB_URL, {
+mongoose.connect('mongodb://localhost:27017/stokvel', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -36,7 +35,8 @@ db.once("open", () => {
 //get all poolfunds in the system
 app.get('/poolfunds', async (req, res) =>{
     const poolfunds = await PoolFund.find({});
-    res.render('pool_funds/index', {poolfunds});
+    const alltransactions = await Transaction.find({});
+    res.render('pool_funds/index', {poolfunds}, {alltransactions});
 })
 
 // Create new poolfund get page
