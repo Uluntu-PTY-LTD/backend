@@ -213,7 +213,7 @@ app.listen(PORT, async () => {
 
 
   cron.schedule('* */5 * * * *', () => {
-    console.log('Running a task every 5 minutes');
+    
   });
   
 
